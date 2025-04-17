@@ -1,0 +1,25 @@
+<!-- templates/des.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3DES Encryption/Decryption</title>
+</head>
+<body>
+    <h2>3DES File Encryption/Decryption</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file">Choose a file:</label>
+        <input type="file" name="file" required><br><br>
+
+        <label for="key">Enter a key:</label>
+        <input type="text" name="key" required><br><br>
+
+        <label for="operation">Choose operation:</label>
+        <select name="operation">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

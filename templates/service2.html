@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSA Encryption Service</title>
+</head>
+<body>
+    <h1>RSA Encryption / Decryption</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Select operation:</label><br>
+        <input type="radio" id="generate" name="operation" value="generate" checked>
+        <label for="generate">Generate Keys</label><br>
+
+        <input type="radio" id="encrypt" name="operation" value="encrypt">
+        <label for="encrypt">Encrypt File</label><br>
+
+        <input type="radio" id="decrypt" name="operation" value="decrypt">
+        <label for="decrypt">Decrypt File</label><br><br>
+
+        <label for="key_file">Key File (.pem):</label>
+        <input type="file" name="key_file"><br><br>
+
+        <label for="data_file">File to Encrypt/Decrypt:</label>
+        <input type="file" name="data_file"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

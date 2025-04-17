@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Steganography</title>
+    <script>
+        function toggleFields() {
+            const mode = document.querySelector('select[name="mode"]').value;
+            const targetField = document.querySelector('input[name="target"]');
+            const extField = document.getElementById('ext-field');
+
+            const isEmbed = mode === 'embed';
+            const isExtract = mode === 'extract';
+
+            targetField.disabled = isExtract;
+            targetField.required = isEmbed;
+            extField.style.display = isExtract ? 'block' : 'none';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            toggleFields(); // run on load
+            document.querySelector('select[name="mode"]').addEventListener('change', toggleFields);
+        });
+    </script>
+</head>
+<body>
+    <h1>Steganography Service</h1>
+    <form action="{{ url_for('steganography') }}" method="post" enctype="multipart/form-data">
+        <label for="carrier">Carrier File:</label>
+        <input type="file" name="carrier" required><br><br>
+
+        <label for="target">File to Hide:</label>
+        <input type="file" name="target"><br><br>
+
+        <label for="skip">Skip Bytes:</label>
+        <input type="number" name="skip" value="100" required><br><br>
+
+        <label for="pattern">Pattern (e.g., 8,16,20):</label>
+        <input type="text" name="pattern" value="8,16,20" required><br><br>
+
+        <label for="mode">Mode:</label>
+        <select name="mode">
+            <option value="embed">Embed</option>
+            <option value="extract">Extract</option>
+        </select><br><br>
+
+        <label for="size">Size (only for extraction):</label>
+        <input type="number" name="size"><br><br>
+
+        <div id="ext-field" style="display: none;">
+            <label for="ext">Output Extension (e.g., txt, png):</label>
+            <input type="text" name="ext" placeholder="txt or png"><br><br>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
+

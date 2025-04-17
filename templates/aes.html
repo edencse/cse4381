@@ -1,0 +1,40 @@
+<!-- templates/aes.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AES Encryption</title>
+</head>
+<body>
+    <h2>AES Encryption/Decryption</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Operation:</label>
+        <select name="operation">
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select><br><br>
+
+        <label>Mode:</label>
+        <select name="mode">
+            <option value="EAX">EAX</option>
+            <option value="CBC">CBC</option>
+        </select><br><br>
+
+        <label>Key Size (bits):</label>
+        <select name="key_size">
+            <option value="128">128</option>
+            <option value="256">256</option>
+        </select><br><br>
+
+        <label>Password:</label>
+        <input type="text" name="password"><br><br>
+
+        <label>IV (any string):</label>
+        <input type="text" name="iv_input"><br><br>
+
+        <label>Input File:</label>
+        <input type="file" name="input_file"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

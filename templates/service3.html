@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service 3 - File Hashing</title>
+</head>
+<body>
+    <h1>File Hashing & Comparison</h1>
+
+    <h2>Hash a File</h2>
+    <form method="POST" action="{{ url_for('hash_file') }}" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Generate Hash</button>
+    </form>
+    {% if hash_result %}
+        <p><strong>SHA-256 Hash:</strong> {{ hash_result }}</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Compare Two Files</h2>
+    <form method="POST" action="{{ url_for('compare_hashes') }}" enctype="multipart/form-data">
+        <input type="file" name="file1" required>
+        <input type="file" name="file2" required>
+        <button type="submit">Compare Hashes</button>
+    </form>
+    {% if comparison_result %}
+        <p><strong>Result:</strong> {{ comparison_result }}</p>
+    {% endif %}
+
+    <br><br>
+    <a href="{{ url_for('services') }}">Back to Services</a>
+</body>
+</html>

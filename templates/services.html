@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+</head>
+<body>
+    <h1>Welcome to the Services Page!</h1>
+    <p>Choose a service to perform:</p>
+
+    <button onclick="window.location.href='{{ url_for('service1') }}'">🔐 File Encryption</button>
+    <button onclick="window.location.href='{{ url_for('service2') }}'">🔑 RSA Key Generation</button>
+    <button onclick="window.location.href='{{ url_for('service3') }}'">🧮 File Hashing & Comparison</button>
+    <button onclick="window.location.href='{{ url_for('steganography') }}'">🖼️ Steganography</button>
+
+    <br><br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
+
+
+

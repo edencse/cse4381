@@ -1,0 +1,19 @@
+<!-- templates/service1.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Algorithm</title>
+</head>
+<body>
+    <h2>Select Encryption Method</h2>
+    <form action="{{ url_for('service1_3des') }}">
+        <button type="submit">3DES</button>
+    </form>
+    <form action="{{ url_for('aes') }}">
+        <button type="submit">AES</button>
+    </form>
+</body>
+</html>
+
+
+
