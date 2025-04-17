@@ -127,23 +127,30 @@ def service2():
         data_file = request.files.get('data_file')
 
         if operation == 'generate':
-            key = RSA.generate(2048)
-            private_key = key.export_key(format='PEM')
-            public_key = key.publickey().export_key(format='PEM')
+            try:
+                # Generate RSA key pair
+                key = RSA.generate(2048)
+                private_key = key.export_key(format='PEM')
+                public_key = key.publickey().export_key(format='PEM')
 
-            # Prepare ZIP buffer
-            zip_buffer = BytesIO()
-            with ZipFile(zip_buffer, 'w') as zip_file:
-                zip_file.writestr("key/private.pem", private_key)  # folder inside zip
-                zip_file.writestr("key/public.pem", public_key)
+                # Create a zip file in memory
+                zip_buffer = BytesIO()
+                with ZipFile(zip_buffer, 'w') as zip_file:
+                    # Put keys inside a "key/" folder in the ZIP
+                    zip_file.writestr("key/private.pem", private_key)
+                    zip_file.writestr("key/public.pem", public_key)
 
-            zip_buffer.seek(0)
-            return send_file(
-                zip_buffer,
-                as_attachment=True,
-                download_name="rsa_keys.zip",
-                mimetype='application/zip'
-            )
+                zip_buffer.seek(0)
+
+                return send_file(
+                    zip_buffer,
+                    mimetype='application/zip',
+                    as_attachment=True,
+                    download_name='rsa_keys.zip'
+                )
+            except Exception as e:
+                return f"Error during key generation: {str(e)}", 500
+
 
 
         elif operation == 'encrypt' and key_file and data_file:
