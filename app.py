@@ -18,6 +18,8 @@ from Crypto.Cipher import PKCS1_OAEP, AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
 from hashlib import sha256
+from zipfile import ZipFile
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'thisisasecretkey'
@@ -134,10 +136,6 @@ def service2():
 
             private_io.seek(0)
             public_io.seek(0)
-
-            # You can zip them together to download as one file
-            from zipfile import ZipFile
-
             zip_buffer = BytesIO()
             with ZipFile(zip_buffer, 'w') as zip_file:
                 zip_file.writestr("private.pem", private_key)
