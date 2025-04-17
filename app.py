@@ -428,5 +428,5 @@ if __name__ == '__main__':
     conn.commit()
     conn.close()
     print("✅ Tables created successfully!")  # Confirm that tables are created
-    app.run(debug=True)
+     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 
