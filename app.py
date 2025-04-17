@@ -19,6 +19,7 @@ from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
 from hashlib import sha256
 from zipfile import ZipFile
+from io import BytesIO
 
 app = Flask(__name__)
 
