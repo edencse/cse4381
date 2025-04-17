@@ -129,13 +129,23 @@ def service2():
             private_key = key.export_key(format='PEM')
             public_key = key.publickey().export_key(format='PEM')
 
-            os.makedirs("keys", exist_ok=True)
-            with open("keys/private.pem", "wb") as f:
-                f.write(private_key)
-            with open("keys/public.pem", "wb") as f:
-                f.write(public_key)
+            private_io = BytesIO(private_key)
+            public_io = BytesIO(public_key)
 
-            flash("RSA Keys generated and saved in keys/ directory.")
+            private_io.seek(0)
+            public_io.seek(0)
+
+            # You can zip them together to download as one file
+            from zipfile import ZipFile
+
+            zip_buffer = BytesIO()
+            with ZipFile(zip_buffer, 'w') as zip_file:
+                zip_file.writestr("private.pem", private_key)
+                zip_file.writestr("public.pem", public_key)
+
+            zip_buffer.seek(0)
+            return send_file(zip_buffer, as_attachment=True, download_name="rsa_keys.zip", mimetype='application/zip')
+
 
         elif operation == 'encrypt' and key_file and data_file:
             key_file.seek(0)
