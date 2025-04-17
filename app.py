@@ -420,9 +420,7 @@ def steganography():
 
     return render_template('steg.html')
 
-@app.route('/services/download-db')
-def download_db():
-    return send_file('database.db', as_attachment=True)
+
 
 @app.route('/logout')
 @login_required
